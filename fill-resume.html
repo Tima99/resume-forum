@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="fill-resume.css" />
+    <title>w3CV - Fill Resume</title>
+  </head>
+  <body>
+    
+    <section class="cv-builder-container">
+      
+      <header>
+        <div class="header-nav">
+          <span>w3CV.com</span>
+        </div>
+      </header>
+
+      <div class="add-field header">
+        <!-- <button onclick="AddField(this)" class="btn" id="header">Header</button> -->
+        <div class="caption" onclick="ShowForm()">Create Details</div>
+
+        <div class="create-form dp-none">
+          <div class="container">
+            <label for="header-text">Enter Header:</label>
+            <div class="header-box">
+              <input
+                type="text"
+                name="header"
+                id="header-text"
+                placeholder="e.g, Personal Details , Language etc."
+              />
+            </div>
+            <!-- <button class="add btn no-shadow">Add</button> -->
+          </div>
+
+          <button onclick="AddField(this)" class="btn small-btn" id="subfields">
+            More Sub Fields
+          </button>
+
+          <div class="container">
+            <label for="subfield">Enter Sub-Fields:</label>
+            <div class="sub-fields-box">
+              <input
+                type="text"
+                name="subfield"
+                id="subfield"
+                placeholder="e.g, Name , Primary etc."
+              />
+            </div>
+          </div>
+          <button class="add btn no-shadow" onclick="AddDetails(this)">
+            Add
+          </button>
+        </div>
+      </div>
+
+      <div class="pre-field-box">
+        <div class="header personal" id="field-1">
+          <span class="head">Personal Details</span>
+          <div class="down-arrow" onclick="ToggleForm(this)">
+            <span class="stick stick0"></span>
+            <span class="stick stick1"></span>
+          </div>
+
+          <span class="fill-progress">
+            <span class="fill-progress-bar"></span>
+          </span>
+
+          <div
+            class="add-ons subfields-personal dp-none"
+            onchange="FillProgress(this)"
+          >
+            <label for="photo">Profile Image</label>
+            <input type="file" name="photo" id="photo" class="fill"/>
+
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" class="fill" />
+
+            <label for="dob">Date of Birth</label>
+            <input type="date" name="dob" id="dob" class="fill" />
+
+            <label for="gender">Gender</label>
+            <select name="gender" id="gender" class="fill">
+              <option value="">None</option>
+              <option value="0">Male</option>
+              <option value="2">Female</option>
+              <option value="3">Others</option>
+            </select>
+
+            <label for="martial">Marital Status</label>
+            <select name="marital" id="marital" class="fill">
+              <option value="1">Single</option>
+              <option value="2">Married</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="header qualification" id="field-2">
+          <span class="head">Qualification</span>
+          <div class="down-arrow" onclick="ToggleForm(this)">
+            <span class="stick stick0"></span>
+            <span class="stick stick1"></span>
+          </div>
+
+          <span class="fill-progress">
+            <span class="fill-progress-bar"></span>
+          </span>
+
+          <div
+            id="class-adds"
+            class="add-ons dp-none"
+            onchange="FillProgress(this)"
+          >
+            <div class="subfields-class">
+              <label for="class">Class / Study</label>
+              <select
+                name="class"
+                id="class"
+                class="fill"
+                onchange="ClassSelect(this)"
+              >
+                <option value="">Select</option>
+                <option value="0">10th</option>
+                <option value="1">12th</option>
+                <option value="2">Graduation</option>
+                <option value="3">Post-Graduation</option>
+              </select>
+
+              <label for="school">University / Board</label>
+              <div style="position: relative">
+                <input
+                  type="text"
+                  name="board"
+                  id="board"
+                  class="fill"
+                  onkeyup="ShowRelevantOpt(this)"
+                />
+                <div class="drop-down-menu dp-none">
+                  <!-- <span class="opt"></span> -->
+                </div>
+              </div>
+
+              <label for="score">Percentage</label>
+              <input type="number" name="score" class="fill score" />
+              <span class="percent-symbol">%</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="header objective" id="field-3">
+          <span class="head">Objective</span>
+
+          <div class="down-arrow" onclick="ToggleForm(this)">
+            <span class="stick stick0"></span>
+            <span class="stick stick1"></span>
+          </div>
+
+          <div class="fill-progress">
+            <span class="fill-progress-bar"></span>
+          </div>
+
+          <div class="add-ons aim dp-none" onchange="FillProgress(this)">
+            <textarea name="aim" id="aim" rows="5" class="fill"></textarea>
+          </div>
+        </div>
+
+        <div class="header contact" id="field-4">
+          <span class="head">Contact</span>
+
+          <div class="down-arrow" onclick="ToggleForm(this)">
+            <span class="stick stick0"></span>
+            <span class="stick stick1"></span>
+          </div>
+
+          <div class="fill-progress">
+            <span class="fill-progress-bar"></span>
+          </div>
+
+          <div class="add-ons aim dp-none" onchange="FillProgress(this)">
+            <label for="phone">Mobile No.</label>
+            <input type="number" name="phone" id="phone" class="fill" />
+
+            <label for="email">E-mail</label>
+            <input type="email" name="email" id="email" class="fill" />
+          </div>
+        </div>
+
+        <div class="header skills" id="field-5">
+          <span class="head">Skills</span>
+
+          <div class="down-arrow" onclick="ToggleForm(this)">
+            <span class="stick stick0"></span>
+            <span class="stick stick1"></span>
+          </div>
+
+          <div class="fill-progress">
+            <span class="fill-progress-bar"></span>
+          </div>
+
+          <div class="add-ons aim dp-none" onchange="FillProgress(this)">
+            <div>
+              <div class="addons">
+                <label for="skill1">Skill 1</label>
+
+                <button class="btn add-skill" onclick="AddSkill(this)">
+                  Add Skill
+                </button>
+              </div>
+              <input type="text" name="skill1" id="skill1" class="fill" />
+              <div class="level-box">
+                <span class="head-level">Level </span>
+                <input
+                  type="range"
+                  name="level"
+                  id="level"
+                  min="0"
+                  max="100"
+                  onchange="level(this)"
+                  class="fill"
+                />
+                <span class="level-text">50%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="header projets" id="field-6">
+          <span class="head">Projects</span>
+
+          <div class="down-arrow" onclick="ToggleForm(this)">
+            <span class="stick stick0"></span>
+            <span class="stick stick1"></span>
+          </div>
+
+          <div class="fill-progress">
+            <span class="fill-progress-bar"></span>
+          </div>
+
+          <div class="add-ons projects dp-none" onchange="FillProgress(this)">
+            <div>
+              <div class="addons">
+                <label for="title">Title 1</label>
+
+                <button class="btn add-skill" onclick="AddProject(this)">
+                  Add Project
+                </button>
+              </div>
+              <input
+                type="text"
+                name="title"
+                class="fill"
+                placeholder="Add project title"
+              />
+
+              <label for="project">Project</label>
+              <input
+                type="text"
+                name="project"
+                class="fill"
+                placeholder="Enter project link"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="button-go header">
+        <button class="btn">Create w3CV</button>
+      </div>
+    </section>
+    <!-- Javascripts -->
+
+    <!-- add-fields -->
+    <script>
+      const header = document.querySelector(".header-box");
+      const subfields = document.querySelector(".sub-fields-box");
+
+      function AddField(type) {
+        const input = document.createElement("input");
+        input.name = "subfield";
+        input.type = "text";
+        subfields.appendChild(input);
+      }
+
+      let flag = 1;
+      function ShowForm() {
+        if (flag) {
+          document.querySelector(".create-form").style.display = "block";
+          document.querySelector(".add-field").classList.add("bg-change");
+        } else {
+          document.querySelector(".create-form").style.display = "none";
+          document.querySelector(".add-field").classList.remove("bg-change");
+        }
+        flag = 1 - flag;
+      }
+
+      function AddDetails(ele) {
+        const uniqueId =
+          document.querySelector(".pre-field-box").childElementCount + 1;
+
+        const header = document.createElement("div");
+        document.querySelector(".pre-field-box").appendChild(header);
+        const header_text = document.querySelector(
+          '.add-field input[name="header"]'
+        );
+        header.classList.add("header");
+        header.id = "field-" + uniqueId;
+
+        header.innerHTML =
+          `<span class="head">` +
+          header_text.value +
+          `</span>
+  
+        <div class="down-arrow" onclick="ToggleForm(this)">
+          <span class="stick stick0"></span>
+          <span class="stick stick1"></span>
+        </div>
+
+        <div class="fill-progress">
+          <span class="fill-progress-bar"></span>
+        </div>
+
+        <div
+          class="add-ons subfields-` +
+          header_text.value +
+          ` dp-none"
+          onchange= "FillProgress(this)"
+        ></div>
+        `;
+
+        const subfield = document.querySelectorAll(
+          '.add-field input[name="subfield"]'
+        );
+        const subFieldsLen = subfield.length;
+        let temp = 0;
+        while (temp < subFieldsLen) {
+          const label = document.createElement("label");
+          header
+            .querySelector(".subfields-" + header_text.value)
+            .appendChild(label);
+          label.innerText = subfield[temp].value;
+
+          const input = document.createElement("input");
+          header
+            .querySelector(".subfields-" + header_text.value)
+            .appendChild(input);
+          input.classList.add("fill");
+          temp++;
+        }
+
+        document.querySelector(".create-form").style.display = "none";
+        document.querySelector(".add-field").classList.remove("bg-change");
+        flag = 1;
+
+        downArrows.length = 0;
+        downArrows = document.querySelectorAll(".down-arrow");
+      }
+    </script>
+
+    <!-- personal -->
+    <script>
+      function ToggleForm(arr) {
+        const subFields = arr.parentElement.querySelector(".add-ons");
+        if (!arr.parentElement.querySelector(".down-arrow-open")) {
+          arr.classList.add("down-arrow-open");
+          subFields.style.display = "block";
+        } else {
+          arr.classList.remove("down-arrow-open");
+          subFields.style.display = "none";
+        }
+        HideOthers(arr);
+      }
+
+      function FillProgress(ele) {
+        const inputsAll = ele.querySelectorAll(".fill");
+        let inputLen = inputsAll.length;
+        const increaseBarPercent = 100 / inputLen;
+        const progressEle =
+          ele.parentElement.querySelector(".fill-progress-bar");
+        let textFillcount = 0;
+
+        while (inputLen--)
+          if (inputsAll[inputLen].value || inputsAll[inputLen].value != "")
+            textFillcount++;
+
+        progressEle.style.width = increaseBarPercent * textFillcount + "%";
+      }
+    </script>
+
+    <!-- qualification -->
+    <script>
+      const boards = [
+        "Central Board of School Education",
+        "Council for the Indain School Certificate Examination",
+        "National Institute of Open Schooling",
+        "international Baccalaureate",
+        "haryana board of School Education",
+        "Uttarpradesh board of school education",
+        "Jammu and kashmir state board of school education",
+        "Board of Secondary Education Rajasthan",
+        "Himachal Pradesh Board of School education",
+        "Madhya Pradesh Board of School education",
+        "Chhattisgarh Board of School education",
+        "Punjab School education Board",
+        "Bihar school examination board",
+        "Andhra Pradesh Board of Secondary education",
+        "West Bengal Board of Secondary Education",
+        "West Bengal Council of Higher Secondary Education",
+      ];
+
+      const matchBoards = [];
+      function ShowRelevantOpt(ele) {
+        const dropMenu = ele.parentElement.querySelector(".drop-down-menu");
+
+        dropMenu.innerHTML = "";
+        matchBoards.length = 0;
+        const str1 = ele.value.toLowerCase();
+        for (let i = 0; i < boards.length; i++) {
+          const school = EqualStr(str1, boards[i].toLowerCase());
+          school ? matchBoards.push(school) : "";
+        }
+
+        let count = matchBoards.length;
+        dropMenu.style.display = "block";
+
+        if (!count) {
+          dropMenu.style.display = "none";
+          return;
+        }
+        while (count--) {
+          const box = document.createElement("span");
+          dropMenu.appendChild(box);
+          box.classList.add("opt");
+          box.innerText = matchBoards[count];
+          box.addEventListener("click", (e) => {
+            ele.value = e.target.innerText;
+            dropMenu.style.display = "none";
+          });
+        }
+      }
+
+      function EqualStr(str1, str2) {
+        const count = str1.length < str2.length ? str1.length : str2.length;
+        let temp = 0;
+        while (temp < count)
+          if (str1[temp] === str2[temp]) temp++;
+          else return 0;
+        return str2;
+      }
+
+      const classes = ["10th", "12th", "Graduation"];
+      function ClassSelect(ele) {
+        let count = Math.floor(ele.value);
+
+        const extras =
+          ele.parentElement.parentElement.querySelectorAll(".add-ons-extra");
+        let temp = extras.length;
+
+        while (temp--)
+          ele.parentElement.parentElement.removeChild(extras[temp]);
+
+        while (count--) {
+          const add_ons = document.createElement("div");
+          document.querySelector("#class-adds").appendChild(add_ons);
+          add_ons.innerHTML =
+            `<hr><label for="class">Class / Study</label>
+            <input type="text" name="class" value=` +
+            classes[count] +
+            ` class="fill"/>
+            
+            <label for="school">University / Board</label>
+            <div style="position: relative;">
+              <input
+                type="text"
+                name="board"
+                class="fill"
+                onkeyup="ShowRelevantOpt(this)"
+              />
+              <div class="drop-down-menu dp-none">
+              </div>
+            </div>
+            
+            <label for="score">Percentage</label>
+            <input type="number" name="score" class="fill score">
+            <span class="percent-symbol">%</span>
+            `;
+
+          add_ons.classList.add("add-ons-extra");
+        }
+      }
+    </script>
+
+    <!-- Add Skills -->
+    <script>
+      function level(ele) {
+        ele.parentElement.querySelector(".level-text").innerText =
+          ele.value + "%";
+      }
+
+      let skillAdd = 1;
+      function AddSkill(ele) {
+        const addSkill = document.createElement("div");
+        ele.parentElement.parentElement.parentElement.appendChild(addSkill);
+        addSkill.innerHTML =
+          `<hr>
+            <label for="skill1">Skill ` +
+          ++skillAdd +
+          `</label>
+            <input type="text" name="skill1" class="fill">
+            <div class="level-box">
+              <span class="head-level">Level </span>
+              <input type="range" name="level"  min="0" max="100" onchange="level(this)" class="fill">
+              <span class="level-text">50%</span>
+            </div>
+        `;
+      }
+    </script>
+
+    <!-- Add Projects -->
+    <script>
+      let title = 1;
+      function AddProject(ele) {
+        const addProject = document.createElement("div");
+        ele.parentElement.parentElement.parentElement.appendChild(addProject);
+
+        addProject.innerHTML =
+          ` <hr>
+            <label for="title">Title ` +
+          ++title +
+          `</label>
+            <input type="text" name="title" class="fill" placeholder="Add project title" />
+
+            <label for="project">Project</label>
+            <input type="text" name="project" class="fill" placeholder="Enter project link">
+        
+        `;
+      }
+    </script>
+
+    <!-- onlcick down arrow -->
+    <script>
+      let downArrows = document.getElementsByClassName("down-arrow");
+
+      function HideOthers(dp_on) {
+        const dp_on_ele = dp_on.parentElement.id;
+        let count = downArrows.length;
+
+        for (let i = 0; i < count; i++) {
+          const heads_id = downArrows[i].parentElement.id;
+          if (heads_id != dp_on_ele) {
+            downArrows[i].classList.remove("down-arrow-open");
+            downArrows[i].parentElement.querySelector(
+              ".add-ons"
+            ).style.display = "none";
+          }
+        }
+      }
+    </script>
+
+  </body>
+</html>
